@@ -1,0 +1,100 @@
+body {
+    background-color: #222;
+    color: #fff;
+    font-family: sans-serif;
+}
+
+.login {
+    text-align: center;
+}
+
+.login_img {
+    width: 300px;
+    height: auto;
+    margin: 8em auto 0;
+}
+
+.buttondiv {
+    padding-left: 45%;
+    padding-right: 45%;
+}
+
+/*.login_button {
+    outline: 0;
+    grid-gap: 8px;
+    align-items: center;
+    background: 0 0;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 14px;
+    gap: 8px;
+    justify-content: center;
+    line-height: 1.5;
+    overflow: hidden;
+    padding: 6px 40px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: all .14s ease-out;
+    white-space: nowrap;
+}
+
+.login_button:hover {
+    box-shadow: 4px 4px 0 #fff;
+    transform: translate(-4px,-4px);
+}
+
+.login_button:focus-visible{
+    outline-offset: 1px;
+}*/
+
+button {
+    background: #2563eb;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    box-shadow: 0 0 0 1px #404040,0 1px 1px 0 hsla(0,0%,9%,.5),0 2px 5px 0 rgba(64,64,64,.5);;
+}
+
+button:hover {
+    box-shadow: none;
+    transition: .2s box-shadow;
+}
+
+.inputs, .inputs > div  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs > div {
+    width: 15%;
+    margin-bottom: 1em;
+}
+
+input, select {
+    width: 15vw;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+select {
+    width: 16.5vw;
+}
+
+label {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    font-weight: 300;
+}
+
+.white {
+    fill: #fff;
+}
