@@ -1,5 +1,5 @@
 # Use an official PHP runtime as the base image
-FROM php:alpine3.18
+FROM php:8.1-alpine
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
