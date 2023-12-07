@@ -28,10 +28,6 @@ class Athletes
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthdate = null;
 
-    #[ORM\ManyToOne(inversedBy: 'ath�lete')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Sports $sports = null;
-
     #[ORM\OneToMany(mappedBy: 'athletes', targetEntity: Times::class)]
     private Collection $times;
 
@@ -101,18 +97,6 @@ class Athletes
     public function setBirthdate(\DateTimeInterface $birthdate): static
     {
         $this->birthdate = $birthdate;
-
-        return $this;
-    }
-
-    public function getSports(): ?Sports
-    {
-        return $this->sports;
-    }
-
-    public function setSports(?Sports $sports): static
-    {
-        $this->sports = $sports;
 
         return $this;
     }

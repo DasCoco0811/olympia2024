@@ -24,7 +24,6 @@ class AthletesCrudController extends AbstractCrudController
             TextField::new('description'),
             AssociationField::new('countries')->autocomplete(),
             DateField::new('birthdate'),
-            AssociationField::new('sports')->autocomplete(),
             ChoiceField::new('sex')->allowMultipleChoices(false)->setChoices([
                 'Male' => 'm',
                 'Female' => 'f',
