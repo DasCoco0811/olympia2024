@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: Olympia Paris 2024 API
+  version: "1.0"
+servers:
+  - url: https://localhost:8000/api/
+tags:
+  - name: Athlets
+    description: Get all information about an athlet
+  - name: Matches
+    description: Get all matches and the results
+paths:
+  /athlets:
+    get:
+      tags:
+        - Athlets
+      summary: Get a list of all athlets
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Athlets'
+  /matches/{sport}:
+    get:
+      tags:
+        - Matches
+      summary: Get a list of all matches for the given sport
+      parameters:
+        - in: path
+          name: sport
+          required: true
+          schema:
+            type: string
+          description: The sport discipline that you want the match results
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matches'
+
+components:
+  schemas:
+    Athlet:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        firstName:
+          type: string
+          example: "Lucas"
+        lastName:
+          type: string
+          example: "Bernardo"
+        description:
+          type: string
+          example: "Fortnite Spieler Nummer 1"
+        sex:
+          type: string
+          enum: [m, f]
+        countryCode:
+          type: string
+          enum: [de]
+        birthday:
+          type: string
+          example: "2000-12-25"
+    Athlets:
+      type: array
+      items:
+        $ref: '#/components/schemas/Athlet'
+    MatchData:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        athletId:
+          type: integer
+          example: 21
+        time:
+          type: integer
+          example: 69.187
+        position:
+          type: integer
+          enum: [1,2,3,4,5,6,7,8,9,10]
+    Match:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Runde 1"
+        sex:
+          type: string
+          enum: [m, f]
+        matchData:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchData'
+    Matches:
+      type: array
+      items:
+        $ref: '#/components/schemas/Match'
