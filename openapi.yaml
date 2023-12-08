@@ -9,6 +9,8 @@ tags:
     description: Get all information about an athlet
   - name: Matches
     description: Get all matches and the results
+  - name: Utilities
+    description: Utility-Endpoints for the Front-End
 paths:
   /athlets:
     get:
@@ -22,25 +24,66 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Athlets'
-  /matches/{sport}:
+  /matches/sprint:
     get:
       tags:
         - Matches
-      summary: Get a list of all matches for the given sport
-      parameters:
-        - in: path
-          name: sport
-          required: true
-          schema:
-            type: string
-          description: The sport discipline that you want the match results
+      summary: Get a list of all matches for 100m sprint
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Matches'
+                $ref: '#/components/schemas/MatchesSprint'
+  /matches/swimming:
+    get:
+      tags:
+        - Matches
+      summary: Get a list of all matches for swimming
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchesSwimming'
+  /matches/horsejumping:
+    get:
+      tags:
+        - Matches
+      summary: Get a list of all matches for horse jumping
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchesHorsejumping'
+  /matches/longjump:
+    get:
+      tags:
+        - Matches
+      summary: Get a list of all matches for long jump
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchesLongjump'
+  /utilities/swimmingStyles:
+    get:
+      tags:
+        - Utilities
+      summary: Get a list of all swimming styes defined in the back-end
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwimmingStyle'
 
 components:
   schemas:
@@ -73,7 +116,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Athlet'
-    MatchData:
+    MatchDataSprint:
       type: object
       properties:
         id:
@@ -89,7 +132,7 @@ components:
         position:
           type: integer
           enum: [1,2,3,4,5,6,7,8,9,10]
-    Match:
+    MatchSprint:
       type: object
       properties:
         name:
@@ -101,8 +144,114 @@ components:
         matchData:
           type: array
           items:
-            $ref: '#/components/schemas/MatchData'
-    Matches:
+            $ref: '#/components/schemas/MatchDataSprint'
+    MatchesSprint:
       type: array
       items:
-        $ref: '#/components/schemas/Match'
+        $ref: '#/components/schemas/MatchSprint'
+    MatchDataSwimming:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        athletId:
+          type: integer
+          example: 21
+        time:
+          type: integer
+          example: 69.187
+        position:
+          type: integer
+          enum: [1,2,3,4,5,6,7,8,9,10]
+        swimmingStyle:
+          type: string
+          enum: ["Butterfly", "Esel"]
+    MatchSwimming:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Runde 1"
+        sex:
+          type: string
+          enum: [m, f]
+        matchData:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchDataSwimming'
+    MatchesSwimming:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchSwimming'
+    MatchDataHorsejumping:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        athletId:
+          type: integer
+          example: 21
+        points:
+          type: integer
+          example: 847
+        penalitiesPoint:
+          type: integer
+          example: 88
+    MatchHorsejumping:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Runde 1"
+        sex:
+          type: string
+          enum: [m, f]
+        matchData:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchDataHorsejumping'
+    MatchesHorsejumping:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchHorsejumping'
+    MatchDataLongjump:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        athletId:
+          type: integer
+          example: 21
+        jumpLength:
+          type: array
+          example: [20.3,32.1,28.6]
+          items:
+            type: integer
+    MatchLongjump:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Runde 1"
+        sex:
+          type: string
+          enum: [m, f]
+        matchData:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchDataLongjump'
+    MatchesLongjump:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchLongjump'
+    SwimmingStyle:
+      type: array
+      example: ["Butterfly", "Jack Senkrechter Schwimmstil", "GöpfertGHG"]
+      items:
+        type: string
