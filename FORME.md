@@ -66,3 +66,9 @@ Build production:
 ```console
 yarn build
 ```
+
+### Symfony
+Symfony CLI:
+```console
+curl -sS https://get.symfony.com/cli/installer | bash
+```
