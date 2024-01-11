@@ -7,6 +7,9 @@ use App\Entity\Countries;
 use App\Entity\Medals;
 use App\Entity\Sports;
 use App\Entity\Times;
+use App\Entity\TimesLongjump;
+use App\Entity\TimesShowjumping;
+use App\Entity\TimesSprint;
 use App\Entity\TimesSwimming;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -36,8 +39,11 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::linkToCrud('Countries', 'fas fa-list', Countries::class);
         yield MenuItem::linkToCrud('Times', 'fas fa-list', Times::class);
-        yield MenuItem::linkToCrud('Athletes', 'fas fa-list', Athletes::class);
-        yield MenuItem::linkToCrud('Swimming', 'fas fa-list', TimesSwimming::class);
+        yield MenuItem::linkToCrud('Lazies', 'fas fa-list', Athletes::class);
+        yield MenuItem::linkToCrud('Water', 'fas fa-list', TimesSwimming::class);
+        yield MenuItem::linkToCrud('Walk', 'fas fa-list', TimesSprint::class);
+        yield MenuItem::linkToCrud('Horse', 'fas fa-list', TimesShowjumping::class);
+        yield MenuItem::linkToCrud('Doodle Jump', 'fas fa-list', TimesLongjump::class);
 
         /*Falls benötigt
          *  yield MenuItem::linkToCrud('Sports', 'fas fa-list', Sports::class);
