@@ -21,95 +21,118 @@ class SportsRepository extends ServiceEntityRepository
         parent::__construct($registry, Sports::class);
     }
 
-    public function getApiAllSports(): array
-    {
-        $connection = $this->getEntityManager()->getConnection();
-
-        $sql = '
-            SELECT *
-            FROM sports
-        ';
-
-        $stmt = $connection->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-
-        return $resultSet->fetchAllAssociative();
-    }
-
-    public function getApiByIdSport($id): array
-    {
-        $connection = $this->getEntityManager()->getConnection();
-
-        $sql = '
-            SELECT *
-            FROM sports
-            WHERE id = ?
-        ';
-        $stmt = $connection->prepare($sql);
-        $stmt->bindValue(1, $id);
-        $resultSet = $stmt->executeQuery();
-
-        return $resultSet->fetchAllAssociative();
-    }
-
+    //name: sports_detail
     public function getApiByDetailId($id): array
     {
         $connection = $this->getEntityManager()->getConnection();
 
+        if ($id === '1'){
+            $table = 'times_sprint';
+            $result = $this->time($connection, $table);
+        }elseif ($id === '2'){
+            $table = 'times_swimming';
+            $result = $this->time($connection, $table);
+        }elseif ($id === '3'){
+            $table = 'times_showjumping';
+            $result = $this->time($connection, $table);
+        }elseif ($id === '4'){
+            $result = $this->distance($connection);
+        }else {
+            //error are 4 ur mom
+            return array('your' => 'mom');
+        }
+
+        return $result;
+    }
+
+    private function time($connection, $table): array
+    {
         $sql1 = '
             SELECT *
-            FROM times t
-            INNER JOIN athletes a ON t.athletes_id = a.id
-            INNER JOIN sports s ON t.sports_id = s.id
+            FROM '. $table .' t
+            INNER JOIN athletes a ON t.athlete_id = a.id
             INNER JOIN countries c ON a.countries_id = c.id
-            WHERE s.id = ? and a.sex = "f"
+            WHERE a.sex = "f"
             ORDER BY t.time ASC
             LIMIT 1
         ';
+
         $stmt1 = $connection->prepare($sql1);
-        $stmt1->bindValue(1, $id);
         $resultSet1 = $stmt1->executeQuery();
 
         $sql2 = '
             SELECT *
-            FROM times t
-            INNER JOIN athletes a ON t.athletes_id = a.id
-            INNER JOIN sports s ON t.sports_id = s.id
+            FROM '. $table .' t
+            INNER JOIN athletes a ON t.athlete_id = a.id
             INNER JOIN countries c ON a.countries_id = c.id
-            WHERE s.id = ? and a.sex = "m"
+            WHERE a.sex = "m"
             ORDER BY t.time ASC
             LIMIT 1
         ';
         $stmt2 = $connection->prepare($sql2);
-        $stmt2->bindValue(1, $id);
         $resultSet2 = $stmt2->executeQuery();
 
         $sql3 = '
             SELECT *
-            FROM times t
-            INNER JOIN athletes a ON t.athletes_id = a.id
-            INNER JOIN sports s ON t.sports_id = s.id
+            FROM '. $table .' t
+            INNER JOIN athletes a ON t.athlete_id = a.id
             INNER JOIN countries c ON a.countries_id = c.id
-            WHERE s.id = ?
             ORDER BY t.time ASC
             LIMIT 1
         ';
         $stmt3 = $connection->prepare($sql3);
-        $stmt3->bindValue(1, $id);
         $resultSet3 = $stmt3->executeQuery();
-
-        $sql4 = '
-            SELECT description
-            FROM sports
-        ';
-        $stmt4 = $connection->prepare($sql4);
-        $resultSet4 = $stmt4->executeQuery();
 
         $result = array(
             'female' => $resultSet1->fetchAllAssociative(),
             'male' => $resultSet2->fetchAllAssociative(),
             'record' => $resultSet3->fetchAllAssociative(),
-            'description' => $resultSet4->fetchAllAssociative(),
+        );
+
+        return $result;
+    }
+
+    private function distance($connection): array
+    {
+        $sql1 = '
+            SELECT *
+            FROM times_longjump t
+            INNER JOIN athletes a ON t.athlete_id = a.id
+            INNER JOIN countries c ON a.countries_id = c.id
+            WHERE a.sex = "f"
+            ORDER BY t.distance ASC
+            LIMIT 1
+        ';
+        $stmt1 = $connection->prepare($sql1);
+        $resultSet1 = $stmt1->executeQuery();
+
+        $sql2 = '
+            SELECT *
+            FROM times_longjump t
+            INNER JOIN athletes a ON t.athlete_id = a.id
+            INNER JOIN countries c ON a.countries_id = c.id
+            WHERE a.sex = "m"
+            ORDER BY t.distance ASC
+            LIMIT 1
+        ';
+        $stmt2 = $connection->prepare($sql2);
+        $resultSet2 = $stmt2->executeQuery();
+
+        $sql3 = '
+            SELECT *
+            FROM times_longjump t
+            INNER JOIN athletes a ON t.athlete_id = a.id
+            INNER JOIN countries c ON a.countries_id = c.id
+            ORDER BY t.distance ASC
+            LIMIT 1
+        ';
+        $stmt3 = $connection->prepare($sql3);
+        $resultSet3 = $stmt3->executeQuery();
+
+        $result = array(
+            'female' => $resultSet1->fetchAllAssociative(),
+            'male' => $resultSet2->fetchAllAssociative(),
+            'record' => $resultSet3->fetchAllAssociative(),
         );
 
         return $result;

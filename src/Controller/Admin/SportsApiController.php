@@ -10,25 +10,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class SportsApiController extends AbstractController
 {
     /*
-     * param kann "all" für alle, oder eine Zahl für eine gewisse Sportart sein
+     * top times male, female and overall
+     *
+     * 1 = spring
+     * 2 = swimming
+     * 3 = showjumping
+     * 4 = longjump
      */
-    #[Route('/api/sports/all/{param}', name: 'sports')]
-    public function index(EntityManagerInterface $entityManager, string $param): Response
-    {
-        $repository = $entityManager->getRepository(Sports::class);
-
-        if ($param == "all") {
-            $data = $repository->getApiAllSports();
-        } elseif (is_numeric($param)) {
-            $data = $repository->getApiByIdSport($param);
-        }
-
-        return new Response(json_encode($data));
-    }
-
-    /*
-     * param kann "all" für alle, oder eine Zahl für eine gewisse Sportart sein
-     */
+    # new
     #[Route('/api/sports/besttimes/{param}', name: 'sports_detail')]
     public function sportDetailIndex(EntityManagerInterface $entityManager, string $param): Response
     {
