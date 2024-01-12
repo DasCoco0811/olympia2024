@@ -13,6 +13,7 @@ class CountriesApiController extends AbstractController
     /*
      * param kann "all" für alle, oder eine Zahl für ein gewisses Land sein
      */
+    # geht fit
     #[Route('/api/countries/id/{param}', name: 'countries')]
     public function index(EntityManagerInterface $entityManager, string $param): Response
     {
@@ -28,8 +29,9 @@ class CountriesApiController extends AbstractController
     }
 
     /*
-     * alle Länder mit den Medaillen dynamisch dazu berechneten
+     * Medallien zusammengefasst für jedes land
      */
+    // mashallah
     #[Route('/api/countries/medals', name: 'countries_medals')]
     public function countryMedalIndex(EntityManagerInterface $entityManager): Response
     {
@@ -41,8 +43,9 @@ class CountriesApiController extends AbstractController
     }
 
     /*
-     * alle Länder mit den Medaillen dynamisch dazu berechneten
+     * Medallien zusammengefasst für jedes land + alle spieler des landes mit im array
      */
+    // inshallah
     #[Route('/api/countries/all/medals', name: 'countries_players_medals')]
     public function countryAllMedalIndex(EntityManagerInterface $entityManager): Response
     {

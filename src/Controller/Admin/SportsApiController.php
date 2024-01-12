@@ -17,7 +17,7 @@ class SportsApiController extends AbstractController
      * 3 = showjumping
      * 4 = longjump
      */
-    # new
+    # einwandfrei mashallah
     #[Route('/api/sports/besttimes/{param}', name: 'sports_detail')]
     public function sportDetailIndex(EntityManagerInterface $entityManager, string $param): Response
     {

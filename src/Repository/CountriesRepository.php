@@ -66,7 +66,7 @@ class CountriesRepository extends ServiceEntityRepository
 
         $sqlResult = $resultSet->fetchAllAssociative();
 
-        $a = array(1, 2, 3, 4);
+        $a = array('sprint', 'swimming', 'showjumping', 'longjump');
 
         foreach ($sqlResult as $country) {
             $gold = 0;
@@ -74,19 +74,22 @@ class CountriesRepository extends ServiceEntityRepository
             $bronze = 0;
 
             foreach ($a as $b){
+                if ($b == 'longjump'){
+                    $row = 'distance';
+                }else {
+                    $row = 'time';
+                }
+
                 $sql2 = '
                     SELECT countries_id
-                    FROM times t
-                    INNER JOIN athletes a ON t.athletes_id = a.id
-                    INNER JOIN sports s ON t.sports_id = s.id
+                    FROM times_'. $b .' t
+                    INNER JOIN athletes a ON t.athlete_id = a.id
                     INNER JOIN countries c ON a.countries_id = c.id
-                    WHERE s.id = ?
-                    ORDER BY t.time ASC
+                    ORDER BY '. $row .' ASC
                     LIMIT 3
                 ';
 
                 $stmt2 = $connection->prepare($sql2);
-                $stmt2->bindValue(1, $b);
                 $resultSet2 = $stmt2->executeQuery();
 
                 $sqlResult2 = $resultSet2->fetchAllAssociative();
@@ -138,7 +141,7 @@ class CountriesRepository extends ServiceEntityRepository
 
         $countries = $resultSet->fetchAllAssociative();
 
-        $a = array(1, 2, 3, 4);
+        $a = array('sprint', 'swimming', 'showjumping', 'longjump');
 
         foreach ($countries as $country) {
             $gold = 0;
@@ -158,19 +161,22 @@ class CountriesRepository extends ServiceEntityRepository
             $sqlResult1 = $resultSet1->fetchAllAssociative();
 
             foreach ($a as $b){
+                if ($b == 'longjump'){
+                    $row = 'distance';
+                }else {
+                    $row = 'time';
+                }
+
                 $sql2 = '
                     SELECT countries_id
-                    FROM times t
-                    INNER JOIN athletes a ON t.athletes_id = a.id
-                    INNER JOIN sports s ON t.sports_id = s.id
+                    FROM times_'. $b .' t
+                    INNER JOIN athletes a ON t.athlete_id = a.id
                     INNER JOIN countries c ON a.countries_id = c.id
-                    WHERE s.id = ?
-                    ORDER BY t.time ASC
+                    ORDER BY '. $row .' ASC
                     LIMIT 3
                 ';
 
                 $stmt2 = $connection->prepare($sql2);
-                $stmt2->bindValue(1, $b);
                 $resultSet2 = $stmt2->executeQuery();
 
                 $sqlResult2 = $resultSet2->fetchAllAssociative();
