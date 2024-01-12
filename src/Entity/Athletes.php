@@ -28,9 +28,6 @@ class Athletes
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthdate = null;
 
-    #[ORM\OneToMany(mappedBy: 'athletes', targetEntity: Times::class)]
-    private Collection $times;
-
     #[ORM\Column(length: 1)]
     private ?string $sex = null;
 
@@ -40,7 +37,6 @@ class Athletes
 
     public function __construct()
     {
-        $this->times = new ArrayCollection();
     }
 
     public function __toString()
@@ -97,36 +93,6 @@ class Athletes
     public function setBirthdate(\DateTimeInterface $birthdate): static
     {
         $this->birthdate = $birthdate;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Times>
-     */
-    public function getTimes(): Collection
-    {
-        return $this->times;
-    }
-
-    public function addTime(Times $time): static
-    {
-        if (!$this->times->contains($time)) {
-            $this->times->add($time);
-            $time->setAthletes($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTime(Times $time): static
-    {
-        if ($this->times->removeElement($time)) {
-            // set the owning side to null (unless already changed)
-            if ($time->getAthletes() === $this) {
-                $time->setAthletes(null);
-            }
-        }
 
         return $this;
     }

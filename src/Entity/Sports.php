@@ -21,16 +21,12 @@ class Sports
     #[ORM\OneToMany(mappedBy: 'sports', targetEntity: Athletes::class)]
     private Collection $ath�lete;
 
-    #[ORM\OneToMany(mappedBy: 'sports', targetEntity: Times::class)]
-    private Collection $time;
-
     #[ORM\Column(length: 511, nullable: true)]
     private ?string $description = null;
 
     public function __construct()
     {
         $this->ath�lete = new ArrayCollection();
-        $this->time = new ArrayCollection();
     }
 
     public function __toString()
@@ -79,36 +75,6 @@ class Sports
             // set the owning side to null (unless already changed)
             if ($athLete->getSports() === $this) {
                 $athLete->setSports(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Times>
-     */
-    public function getTime(): Collection
-    {
-        return $this->time;
-    }
-
-    public function addTime(Times $time): static
-    {
-        if (!$this->time->contains($time)) {
-            $this->time->add($time);
-            $time->setSports($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTime(Times $time): static
-    {
-        if ($this->time->removeElement($time)) {
-            // set the owning side to null (unless already changed)
-            if ($time->getSports() === $this) {
-                $time->setSports(null);
             }
         }
 
