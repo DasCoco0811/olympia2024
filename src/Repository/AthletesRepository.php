@@ -45,7 +45,7 @@ class AthletesRepository extends ServiceEntityRepository
             SELECT *
             FROM athletes a 
             INNER JOIN countries c ON a.countries_id = c.id
-            WHERE sex = "f"
+            WHERE a.sex = "f"
         ';
 
         $stmt = $connection->prepare($sql);
@@ -62,7 +62,7 @@ class AthletesRepository extends ServiceEntityRepository
             SELECT *
             FROM athletes a
             INNER JOIN countries c ON a.countries_id = c.id
-            WHERE sex = "m"
+            WHERE a.sex = "m"
         ';
 
         $stmt = $connection->prepare($sql);
@@ -79,7 +79,7 @@ class AthletesRepository extends ServiceEntityRepository
             SELECT *
             FROM athletes a
             INNER JOIN countries c ON a.countries_id = c.id
-            WHERE id = ?
+            WHERE a.id = ?
         ';
         $stmt = $connection->prepare($sql);
         $stmt->bindValue(1, $id);

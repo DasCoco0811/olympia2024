@@ -85,7 +85,7 @@ class CountriesRepository extends ServiceEntityRepository
                     FROM times_'. $b .' t
                     INNER JOIN athletes a ON t.athlete_id = a.id
                     INNER JOIN countries c ON a.countries_id = c.id
-                    ORDER BY '. $row .' ASC
+                    ORDER BY t.'. $row .' ASC
                     LIMIT 3
                 ';
 
@@ -172,7 +172,7 @@ class CountriesRepository extends ServiceEntityRepository
                     FROM times_'. $b .' t
                     INNER JOIN athletes a ON t.athlete_id = a.id
                     INNER JOIN countries c ON a.countries_id = c.id
-                    ORDER BY '. $row .' ASC
+                    ORDER BY t.'. $row .' ASC
                     LIMIT 3
                 ';
 
