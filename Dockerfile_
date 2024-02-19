@@ -7,14 +7,15 @@ RUN apt-get update \
 RUN a2enmod rewrite
 # Install any extensions you need
 RUN docker-php-ext-install mysqli pdo pdo_mysql zip
+
+
 ## XDEBUG for symfony
 #RUN pecl install xdebug \
 #    && docker-php-ext-enable xdebug
 #
 ## copy xdebug file
 #COPY ./php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-# ccopy apache config file for /var/www/html/public as a server
-COPY ./v-host/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+
 
 # INSTALL COMPOSER
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
@@ -22,7 +23,7 @@ RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
 # enable the installation with the composer command
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# IF NEEDD change to another working directory - 
+# IF NEEDD change to another working directory -
 # set to /var/www/html, normal is this
 WORKDIR /var/www/html
 
@@ -32,7 +33,7 @@ COPY --link composer.* symfony.* ./
 # install with composer!!!!
 RUN set -eux; \
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
-# IF NEED change - 
+# IF NEED change -
 # Copy the source code in /www into the container at /var/www/html which is a normal standard
 # COPY ../www .
 # copy sources
@@ -42,11 +43,10 @@ COPY --link . ./
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
 	composer dump-autoload --classmap-authoritative --no-dev; \
-	# run if needed!!!!
 	composer dump-env prod; #\
 	composer run-script --no-dev post-install-cmd; \
-	chmod +x bin/console; sync; \
-    chmod 777 bin/console;
+	chmod +x bin/console; sync;
+
 # better to use the standard www-data group and user
 # RUN groupadd dev -g 999
 # RUN useradd dev -g dev -d /var/www -m
