@@ -2,17 +2,22 @@ version: '3.9'
 services:
   ### Apache and PHP Container
   webserver:
-    container_name: PHP-webServer
+    container_name: project-webserver
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8000:80
+      - 8010:80
     depends_on:
       - mysql-db
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - project
   ### Mysql container
   mysql-db:
     image: mysql:8.0
+    container_name: project-db
     volumes:
       - ./olympia2024_16-01-24.sql:/docker-entrypoint-initdb.d/olympia2024_16-01-24.sql
     environment:
@@ -20,6 +25,10 @@ services:
       MYSQL_DATABASE: olympia2024
       MYSQL_USER: symfony
       MYSQL_PASSWORD: symfony
-
     ports:
-      - "3306:3306"
+      - 3306:3306
+    networks:
+      - project
+networks:
+  project:
+    driver: bridge

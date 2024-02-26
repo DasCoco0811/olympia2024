@@ -30,6 +30,12 @@ class SportsApiController extends AbstractController
         return new Response(json_encode($data));
     }
 
+    #[Route('/test/kimko', name: 'testkimko')]
+    public function testKimko(){
+
+    }
+
+
     /*
      * top times male, female and overall
      *
