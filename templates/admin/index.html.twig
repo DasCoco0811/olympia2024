@@ -1,1 +1,17 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    Olympia Paris 2024
+{% endblock %}
+
+{% block main %}
+    {{ parent() }}
+    <style>
+
+    </style>
+    <div>
+        <div>Registered Athletes: {{ athletes|length }}</div>
+        <div>Registered Countries: {{ athletes|length }}</div>
+        <div>Registered Athletes: {{ athletes|length }}</div>
+    </div>
+{% endblock %}
