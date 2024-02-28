@@ -20,8 +20,6 @@ class TimesSwimming
     #[ORM\Column]
     private ?float $time = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $penalty = null;
 
     #[ORM\Column]
     private ?bool $disqualified = null;
@@ -51,18 +49,6 @@ class TimesSwimming
     public function setTime(float $time): static
     {
         $this->time = $time;
-
-        return $this;
-    }
-
-    public function getPenalty(): ?float
-    {
-        return $this->penalty;
-    }
-
-    public function setPenalty(?float $penalty): static
-    {
-        $this->penalty = $penalty;
 
         return $this;
     }

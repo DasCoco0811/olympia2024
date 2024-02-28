@@ -19,8 +19,9 @@ class TimesLongjumpCrudController extends AbstractCrudController
     {
         return [
             AssociationField::new('athlete')->autocomplete()->setRequired(true),
-            NumberField::new('distance')->setRequired(true),
-            NumberField::new('penalty'),
+            NumberField::new('distance1')->setRequired(true)->setLabel('1st Jump Distance'),
+            NumberField::new('distance2')->setRequired(true)->setLabel('2nd Jump Distance'),
+            NumberField::new('distance3')->setRequired(true)->setLabel('3rd Jump Distance'),
             BooleanField::new('disqualified')
         ];
     }

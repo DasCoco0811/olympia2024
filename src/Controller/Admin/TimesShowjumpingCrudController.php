@@ -19,8 +19,8 @@ class TimesShowjumpingCrudController extends AbstractCrudController
     {
         return [
             AssociationField::new('athlete')->autocomplete()->setRequired(true),
-            NumberField::new('time')->setRequired(true),
-            NumberField::new('penalty'),
+            NumberField::new('time')->setRequired(true)->setLabel('Time in s'),
+            NumberField::new('penalty')->setRequired(true)->setLabel('Penalty Points'),
             BooleanField::new('disqualified')
         ];
     }

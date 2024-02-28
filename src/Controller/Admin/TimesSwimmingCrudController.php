@@ -20,8 +20,7 @@ class TimesSwimmingCrudController extends AbstractCrudController
     {
         return [
             AssociationField::new('athlete')->autocomplete()->setRequired(true),
-            NumberField::new('time')->setRequired(true),
-            NumberField::new('penalty'),
+            NumberField::new('time')->setRequired(true)->setLabel('Time in s'),
             BooleanField::new('disqualified')
         ];
     }

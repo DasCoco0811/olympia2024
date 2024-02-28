@@ -18,10 +18,11 @@ class TimesLongjump
     private ?Athletes $athlete = null;
 
     #[ORM\Column]
-    private ?float $distance = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?float $penalty = null;
+    private ?float $distance1 = null;
+    #[ORM\Column]
+    private ?float $distance2 = null;
+    #[ORM\Column]
+    private ?float $distance3 = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $disqualified = null;
@@ -43,26 +44,36 @@ class TimesLongjump
         return $this;
     }
 
-    public function getDistance(): ?float
+    public function getDistance1(): ?float
     {
-        return $this->distance;
+        return $this->distance1;
     }
 
-    public function setDistance(float $distance): static
+    public function setDistance1(float $distance1): static
     {
-        $this->distance = $distance;
+        $this->distance1 = $distance1;
 
         return $this;
     }
-
-    public function getPenalty(): ?float
+    public function getDistance2(): ?float
     {
-        return $this->penalty;
+        return $this->distance2;
     }
 
-    public function setPenalty(?float $penalty): static
+    public function setDistance2(float $distance2): static
     {
-        $this->penalty = $penalty;
+        $this->distance2 = $distance2;
+
+        return $this;
+    }
+    public function getDistance3(): ?float
+    {
+        return $this->distance3;
+    }
+
+    public function setDistance3(float $distance3): static
+    {
+        $this->distance3 = $distance3;
 
         return $this;
     }
