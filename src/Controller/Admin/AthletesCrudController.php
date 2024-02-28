@@ -19,15 +19,15 @@ class AthletesCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('first_name'),
-            TextField::new('last_name'),
-            TextField::new('description'),
-            AssociationField::new('countries')->autocomplete(),
-            DateField::new('birthdate'),
+            TextField::new('first_name')->setRequired(true),
+            TextField::new('last_name')->setRequired(true),
+            TextField::new('description')->setRequired(true),
+            AssociationField::new('countries')->setLabel("Country")->autocomplete()->setRequired(true),
+            DateField::new('birthdate')->setRequired(true),
             ChoiceField::new('sex')->allowMultipleChoices(false)->setChoices([
                 'Male' => 'm',
                 'Female' => 'f',
-            ]),
+            ])->setRequired(true),
         ];
     }
 }

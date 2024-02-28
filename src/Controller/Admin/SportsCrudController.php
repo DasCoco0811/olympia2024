@@ -16,8 +16,8 @@ class SportsCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            AssociationField::new('sports')->autocomplete(),
-            TextField::new('description'),
+            AssociationField::new('sports')->autocomplete()->setRequired(true),
+            TextField::new('description')->setRequired(true),
         ];
     }
 }

@@ -10,24 +10,33 @@ use Symfony\Component\Routing\Annotation\Route;
 class AthletesApiController extends AbstractController
 {
     /*
-     * param kann "all" für alle, "allm" für alle männlichen, "allf" für alle weiblichen,
-     * oder eine Zahl für einen gewissen Athleten sein
+     * Alle Athleten holen
      */
-    #[Route('/api/athletes/{param}', name: 'athletes')]
-    public function index(EntityManagerInterface $entityManager, string $param): Response
+    #[Route('/api/athletes', name: 'athletes')]
+    public function index(EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Athletes::class);
 
-        if ($param == "allf") {
-            $data = $repository->getApiAllFemaleAthletes();
-        }elseif ($param == "allm"){
-            $data = $repository->getApiAllMaleAthletes();
-        }elseif ($param == "all"){
-            $data = $repository->getApiAllAthletes();
-        }elseif (is_numeric($param)){
-            $data = $repository->getApiByIdAthlete($param);
+        $data = $repository->getApiAllAthletes();
+
+        $newData = array();
+        foreach ($data as $athlete) {
+            array_push($newData, array(
+                "id" => $athlete['id'],
+                "firstName" => $athlete['first_name'],
+                "lastName" => $athlete['last_name'],
+                "description" => $athlete['description'],
+                "sex" => $athlete['sex'],
+                "country" => array(
+                    "id" => $athlete['countries_id'],
+                    "name" => $athlete['name'],
+                    "iso2" => $athlete['iso_2'],
+                    "iso3" => $athlete['iso_3']
+                ),
+                "birthdate" => $athlete['birthdate']
+            ));
         }
 
-        return new Response(json_encode($data));
+        return new Response(json_encode($newData));
     }
 }

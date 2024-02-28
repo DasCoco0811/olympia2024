@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MedalsApiController extends AbstractController
 {
+
+    # ALT
+
     /*
      * param kann "all" für alle, oder eine Zahl für eine gewisse Medaille sein
      */

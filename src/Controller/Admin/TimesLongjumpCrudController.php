@@ -18,8 +18,8 @@ class TimesLongjumpCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            AssociationField::new('athlete')->autocomplete(),
-            NumberField::new('distance'),
+            AssociationField::new('athlete')->autocomplete()->setRequired(true),
+            NumberField::new('distance')->setRequired(true),
             NumberField::new('penalty'),
             BooleanField::new('disqualified')
         ];

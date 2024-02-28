@@ -18,8 +18,8 @@ class TimesSprintCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            AssociationField::new('athlete')->autocomplete(),
-            NumberField::new('time'),
+            AssociationField::new('athlete')->autocomplete()->setRequired(true),
+            NumberField::new('time')->setRequired(true)->setLabel('Time in s')->setRoundingMode(2),
             NumberField::new('penalty'),
             BooleanField::new('disqualified')
         ];

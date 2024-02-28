@@ -46,7 +46,7 @@ class CountriesApiController extends AbstractController
      * Medallien zusammengefasst für jedes land + alle spieler des landes mit im array
      */
     // inshallah
-    #[Route('/api/countries/all/medals', name: 'countries_players_medals')]
+    #[Route('/api/countries/medals/all', name: 'countries_players_medals')]
     public function countryAllMedalIndex(EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Countries::class);
