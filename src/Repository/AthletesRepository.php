@@ -26,7 +26,17 @@ class AthletesRepository extends ServiceEntityRepository
         $connection = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT *
+            SELECT
+                a.id,
+                a.first_name,
+                a.last_name,
+                a.description,
+                a.birthdate,
+                a.sex,
+                c.id as country_id,
+                c.name as country_name,
+                c.iso_2 as country_iso2,
+                c.iso_3 as country_iso3
             FROM athletes a
             INNER JOIN countries c ON a.countries_id = c.id
         ';

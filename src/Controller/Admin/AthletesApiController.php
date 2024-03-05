@@ -28,10 +28,10 @@ class AthletesApiController extends AbstractController
                 "description" => $athlete['description'],
                 "sex" => $athlete['sex'],
                 "country" => array(
-                    "id" => $athlete['countries_id'],
-                    "name" => $athlete['name'],
-                    "iso2" => $athlete['iso_2'],
-                    "iso3" => $athlete['iso_3']
+                    "id" => $athlete['country_id'],
+                    "name" => $athlete['country_name'],
+                    "iso2" => $athlete['country_iso2'],
+                    "iso3" => $athlete['country_iso3']
                 ),
                 "birthdate" => $athlete['birthdate']
             ));
