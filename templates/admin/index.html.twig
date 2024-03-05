@@ -10,8 +10,16 @@
 
     </style>
     <div>
-        <div>Registered Athletes: {{ athletes|length }}</div>
-        <div>Registered Countries: {{ athletes|length }}</div>
-        <div>Registered Athletes: {{ athletes|length }}</div>
+        <h6><strong>ATHLETE OPTIONS REGISTERED</strong></h6>
+        <div>Athletes: {{ athletes|length }}</div>
+        <div>Countries: {{ countries|length }}</div>
+    </div>
+    <hr>
+    <div>
+        <h6><strong>TIMES REGISTERED</strong></h6>
+        <div>Swimming: {{ swimming|length }}</div>
+        <div>Sprint: {{ sprint|length }}</div>
+        <div>Show Jumping: {{ showjumping|length }}</div>
+        <div>Long Jump: {{ longjump|length }}</div>
     </div>
 {% endblock %}
