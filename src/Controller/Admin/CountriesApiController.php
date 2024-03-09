@@ -31,7 +31,6 @@ class CountriesApiController extends AbstractController
     /*
      * Medallien zusammengefasst für jedes land
      */
-    // mashallah
     #[Route('/api/countries/medals', name: 'countries_medals')]
     public function countryMedalIndex(EntityManagerInterface $entityManager): Response
     {
@@ -45,7 +44,6 @@ class CountriesApiController extends AbstractController
     /*
      * Medallien zusammengefasst für jedes land + alle spieler des landes mit im array
      */
-    // inshallah
     #[Route('/api/countries/medals/all', name: 'countries_players_medals')]
     public function countryAllMedalIndex(EntityManagerInterface $entityManager): Response
     {

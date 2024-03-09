@@ -9,13 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MedalsApiController extends AbstractController
 {
-
-    # ALT
-
     /*
      * param kann "all" für alle, oder eine Zahl für eine gewisse Medaille sein
      */
-    # funzt uwu
     #[Route('/api/medals/{param}', name: 'medals')]
     public function index(EntityManagerInterface $entityManager, string $param): Response
     {

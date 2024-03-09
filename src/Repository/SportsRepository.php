@@ -174,8 +174,6 @@ class SportsRepository extends ServiceEntityRepository
             LIMIT 1
         ';
 
-//        die($sql1);
-
         $stmt1 = $connection->prepare($sql1);
         $resultSet1 = $stmt1->executeQuery();
 

@@ -77,11 +77,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Sprint Times', 'fas fa-list', TimesSprint::class);
         yield MenuItem::linkToCrud('Showjumping Times', 'fas fa-list', TimesShowjumping::class);
         yield MenuItem::linkToCrud('LongJump Times', 'fas fa-list', TimesLongjump::class);
-
-        /*Falls benötigt
-         *  yield MenuItem::linkToCrud('Sports', 'fas fa-list', Sports::class);
-         *  yield MenuItem::linkToCrud('Medals', 'fas fa-list', Medals::class);
-         *  yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
-        */
     }
 }

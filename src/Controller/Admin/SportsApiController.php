@@ -39,7 +39,6 @@ class SportsApiController extends AbstractController
      * 3 = showjumping
      * 4 = longjump
      */
-    # einwandfrei mashallah
     #[Route('/api/sports/matches/{param}', name: 'sports_detail')]
     public function sportDetailIndex(EntityManagerInterface $entityManager, string $param): Response
     {
@@ -148,9 +147,7 @@ class SportsApiController extends AbstractController
 
     /*
      * Sportart Data By id
-     * mist
      */
-    # mashallah einwandfrei
     #[Route('/api/sport/display/{param}', name: 'sports_display_detail')]
     public function sportDetailIndexByID(EntityManagerInterface $entityManager, string $param): Response
     {
