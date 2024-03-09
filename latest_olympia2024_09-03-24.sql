@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 8.0.36)
 # Datenbank: olympia2024
-# Verarbeitungszeit: 2024-03-05 13:56:43 +0000
+# Verarbeitungszeit: 2024-03-09 14:06:26 +0000
 # ************************************************************
 
 
@@ -27,11 +27,11 @@ DROP TABLE IF EXISTS `athletes`;
 
 CREATE TABLE `athletes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(1023) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(1023) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birthdate` date NOT NULL,
-  `sex` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sex` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL,
   `countries_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_57A7E4D6AEBAE514` (`countries_id`),
@@ -43,9 +43,23 @@ LOCK TABLES `athletes` WRITE;
 
 INSERT INTO `athletes` (`id`, `first_name`, `last_name`, `description`, `birthdate`, `sex`, `countries_id`)
 VALUES
-	(1,'Alex','Stone','likes to eat chicken','2000-04-02','m',20),
-	(2,'Erna','Cucumber','don\'t like vegetables','2000-02-20','f',5),
-	(3,'Athlete','Athletibus','roses are red','2004-11-08','m',6);
+	(1,'Alex','Stone','Belgiums rising star...','2000-04-02','m',189),
+	(2,'Erna','Cucumber','Awesome athelte, but don\'t like vegetables :(','2000-02-20','f',12),
+	(3,'Kalle','Kralle','Really sharp but talented guy!','2004-11-08','m',6),
+	(5,'Lars','Lampenfisch','His name sounds funny but his jumps are even funnier','2001-03-10','m',6),
+	(6,'Muffin','Bernard','How the fuck could this name be accepted at the registry office','1989-03-17','m',67),
+	(7,'Jacky','Senkel','She has the fastes shoes in the world!','2000-06-01','f',83),
+	(8,'Lady','Gaga','Just jump!','1999-05-02','f',190),
+	(9,'Kanye','West','Our most stupid athlete here','1990-02-02','m',190),
+	(10,'Sarah','Wuffelknecht','Old but fast!!!!','1970-03-31','f',67),
+	(11,'Tom','Trommel','This boy sounds fire','1999-04-01','m',98),
+	(12,'Kahpi','Barra','Capybara :o','2002-05-28','f',79),
+	(13,'Connor','Nagetier','aka. Connor Naggi','2004-12-31','m',77),
+	(14,'Anna-Fischi','Arrrrrrrr','She\'s a pirate :o!','2001-06-01','f',80),
+	(15,'Björn','Hörensohn','Maybe Kanye West isn\'t the most stupid guy here...','2020-02-01','m',174),
+	(16,'Latten','Sepp','Woop woop','2000-03-31','m',158),
+	(17,'Lisa','Antarctica','Cold Lady','1999-03-01','f',151),
+	(18,'Candice','McMuffin','Can this muffin fit inside ur mouth?','1988-02-09','f',35);
 
 /*!40000 ALTER TABLE `athletes` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -58,9 +72,9 @@ DROP TABLE IF EXISTS `countries`;
 
 CREATE TABLE `countries` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `iso_2` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `iso_3` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `iso_2` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `iso_3` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -276,7 +290,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `doctrine_migration_versions`;
 
 CREATE TABLE `doctrine_migration_versions` (
-  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
   `execution_time` int DEFAULT NULL,
   PRIMARY KEY (`version`)
@@ -325,7 +339,7 @@ DROP TABLE IF EXISTS `medals`;
 
 CREATE TABLE `medals` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ranking` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -350,9 +364,9 @@ DROP TABLE IF EXISTS `messenger_messages`;
 
 CREATE TABLE `messenger_messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `headers` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue_name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `available_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `delivered_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
@@ -371,8 +385,8 @@ DROP TABLE IF EXISTS `sports`;
 
 CREATE TABLE `sports` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(511) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -413,8 +427,16 @@ LOCK TABLES `times_longjump` WRITE;
 
 INSERT INTO `times_longjump` (`id`, `athlete_id`, `distance1`, `distance2`, `distance3`, `penalty`, `disqualified`)
 VALUES
-	(1,3,12,0,0,4,1),
-	(2,2,123.13,23525.13,1425241.14124,NULL,0);
+	(1,3,2.42,2.23,2.43,4,0),
+	(3,1,1.53,1.67,2.42,NULL,0),
+	(4,16,2.32,1.99,2.45,NULL,0),
+	(5,15,1.42,1.42,1.42,NULL,1),
+	(6,14,2.64,2.14,2.31,NULL,0),
+	(7,12,2.11,1.95,2.53,NULL,0),
+	(8,11,1.31,1.55,1.73,NULL,0),
+	(9,8,1.56,1.32,1.64,NULL,0),
+	(10,2,3.42,0,0,NULL,1),
+	(11,7,1.97,1.99,1.98,NULL,0);
 
 /*!40000 ALTER TABLE `times_longjump` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -441,7 +463,14 @@ LOCK TABLES `times_showjumping` WRITE;
 
 INSERT INTO `times_showjumping` (`id`, `athlete_id`, `time`, `penalty`, `disqualified`)
 VALUES
-	(1,2,400,100,1);
+	(2,18,178.532,0,0),
+	(3,17,193.214,0,0),
+	(4,16,186.21,20,0),
+	(5,14,183.21,10,0),
+	(6,13,150.21,5,0),
+	(7,11,190.534,0,0),
+	(8,5,182.569,50,0),
+	(9,8,184.423,20,0);
 
 /*!40000 ALTER TABLE `times_showjumping` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -468,9 +497,17 @@ LOCK TABLES `times_sprint` WRITE;
 
 INSERT INTO `times_sprint` (`id`, `athlete_id`, `time`, `penalty`, `disqualified`)
 VALUES
-	(1,2,100,10,1),
-	(2,1,312,3,1),
-	(3,3,346,4,0);
+	(1,2,199.96,10,0),
+	(2,1,312.33,3,0),
+	(3,3,246.45,4,0),
+	(4,5,124.13,NULL,0),
+	(5,6,342.32,NULL,0),
+	(6,7,145.76,NULL,0),
+	(7,8,221.86,NULL,0),
+	(8,9,215.44,NULL,0),
+	(9,10,221.11,NULL,0),
+	(10,11,179.54,NULL,0),
+	(11,12,180.95,NULL,1);
 
 /*!40000 ALTER TABLE `times_sprint` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -496,9 +533,16 @@ LOCK TABLES `times_swimming` WRITE;
 
 INSERT INTO `times_swimming` (`id`, `athlete_id`, `time`, `disqualified`)
 VALUES
-	(1,1,400,1),
-	(2,1,234.453442324,1),
-	(3,2,761.13144220096,1);
+	(1,15,180.456,1),
+	(2,1,234.222,0),
+	(3,2,761.137,0),
+	(5,5,234.996,0),
+	(6,13,280.121,0),
+	(7,9,230.744,0),
+	(8,6,211.877,0),
+	(9,10,198.954,0),
+	(10,17,174.321,0),
+	(11,18,184.215,0);
 
 /*!40000 ALTER TABLE `times_swimming` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -511,11 +555,12 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `roles` json NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
+  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
+  CONSTRAINT `user_chk_1` CHECK (json_valid(`roles`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `user` WRITE;
@@ -523,10 +568,11 @@ LOCK TABLES `user` WRITE;
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`)
 VALUES
-	(2,'admin@admin.comm','[\"ROLE_ADMIN\"]','$2y$13$ccmuwGR1XSSr7iBnyXo/P.LKh0U6sQfQC9SdJqEQL9UqLOXFOR.wS'),
-	(3,'referee1@test.com','[\"ROLE_USER\"]','$2y$13$84JeAfPz8yP6NmU83xnB5uqU.ENCzASXk7mE1KUx5XxfG6zzmU5bG'),
-	(4,'passwort','[\"ROLE_USER\"]','$2y$13$7rqR4wuVjH5x8tvKunv5GeljAAnSFvzRkU0OpgpBT63nE5PuN2gny'),
-	(5,'blabber','[\"ROLE_USER\"]','blabber');
+	(1,'admin@admin.comm',X'5B22524F4C455F41444D494E225D','$2y$13$ccmuwGR1XSSr7iBnyXo/P.LKh0U6sQfQC9SdJqEQL9UqLOXFOR.wS'),
+	(2,'referee1@test.com',X'5B22524F4C455F55534552225D','$2y$13$CA5tJQxtrhAidDiXb0rgdeb2uCNjZUA4DKNnJQhKk/o4rRd5YMwAa'),
+	(3,'referee2@test.com',X'5B22524F4C455F55534552225D','$2y$13$oun3i65JUsQ0z1yugHtN0uC6pPQyYWZARIroK0TXo85D50zD22Swi'),
+	(4,'referee3@test.com',X'5B22524F4C455F55534552225D','$2y$13$pmqQ8uqC57MGsu/vVb.en..2MfS26V23W6ujoxto/5Ekow6Gy53L6'),
+	(5,'referee4@test.com',X'5B22524F4C455F55534552225D','$2y$13$OZ7P2CxFTNhVLmeSlf9TE.qpAruN4CH0DQ/aQ1wJotQH8TaMKGUgq');
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
